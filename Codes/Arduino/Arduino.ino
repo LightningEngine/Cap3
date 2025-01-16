@@ -39,7 +39,7 @@ char text[14];
 void loop(){
   float temp = dht.readTemperature();
   float hum = dht.readHumidity();
-  float press = bmp280.readPressure()/101325;
+  float press = (bmp280.readPressure()/101325);
 
   if (isnan(hum) || isnan(temp) ) {
     Serial.println("DHT not ready!");
@@ -62,12 +62,9 @@ void loop(){
     digitalWrite(ledPin_po, LOW);
     digitalWrite(ledPin_pi, HIGH);
   }
-  //if(temp>5){
-  //  digitalWrite(buzz, HIGH);
-  //}
-  //else{
-  //  digitalWrite(buzz, LOW);
-  //}
+  if(temp>4){
+    tone(buzz, 200, 250);
+  }
 
   Serial.print(temp, 1);
   Serial.print("x");
